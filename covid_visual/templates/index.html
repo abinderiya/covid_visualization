@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  {% block title %}<title>Local Library</title>{% endblock %}
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script defer src="https://use.fontawesome.com/releases/v5.14.0/js/all.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ==" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
+  <!-- Add additional CSS in static file -->
+</head>
+<body>
+    <nav class="level pb-6 pt-6 has-background-light">
+        <p class="level-item has-text-centered title">
+            Ковид-19 мэдээллийн самбар
+        </p>
+    </nav>
+    <div class="container">
+        <div class="columns">
+            <div class="column is-12 main">
+                <span class="heading">Статистик</span>
+                <section class="info-tiles">
+                    <div class="tile is-ancestor has-text-centered">
+                        <div class="tile is-parent">
+                            <article class="tile is-child box">
+                                <p class="title">{{cases_today}}</p>
+                                <p class="subtitle">Батлагдсан тохиолдол</p>
+                            </article>
+                        </div>
+                        <div class="tile is-parent">
+                            <article class="tile is-child box">
+                                <p class="title">{{recovered_today}}</p>
+                                <p class="subtitle">Эдгэрсэн</p>
+                            </article>
+                        </div>
+                        <div class="tile is-parent">
+                            <article class="tile is-child box">
+                                <p class="title">{{hospitalized}}</p>
+                                <p class="subtitle">Эмчлүүлж буй</p>
+                            </article>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+        <div class="columns">
+            <div class="column">
+                <div class="box">
+                    <canvas id="orderChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+{{cases|json_script:'casesData'}}
+{{recovered|json_script:'recoveredData'}}
+{% load static %}
+<script src="{% static 'js/g.js' %}"></script>
+</body>
+</html>
